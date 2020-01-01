@@ -1,0 +1,15 @@
+box: alpine
+no-response-timeout: 10
+
+build:
+  steps:
+    - internal/docker-build:
+        dockerfile: Dockerfile
+        image-name: gcloud-terraform
+    - internal/docker-push:
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        registry: https://registry.hub.docker.com
+        repository: akabe/gcloud-terraform
+        image-name: gcloud-terraform
+        tag: latest, $WERCKER_GIT_TAG
